@@ -1,0 +1,38 @@
+@model User
+
+
+<div class="card shadow w-75 border-3 border-light-subtle">
+    <div class="card-header">
+        <h1 class="text-center text-primary">Register</h1>
+    </div>
+    <div class="card-body">
+        <form asp-action="CreateUser" asp-controller="User" method="post">
+            <div class="mb-3">
+                <label asp-for="FirstName" class="form-label   fs-5 text-primary-emphasis"></label>
+                <input asp-for="FirstName" class="form-control fs-5 text-center">
+                <span asp-validation-for="FirstName" class="fs-6 text-danger-emphasis"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="LastName" class="form-label   fs-5 text-primary-emphasis"></label>
+                <input asp-for="LastName" class="form-control fs-5 text-center">
+                <span asp-validation-for="LastName" class="fs-6 text-danger-emphasis"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label   fs-5 text-primary-emphasis"></label>
+                <input asp-for="Email" class="form-control fs-5 text-center">
+                <span asp-validation-for="Email" class="fs-6 text-danger-emphasis"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Password" class="form-label   fs-5 text-primary-emphasis"></label>
+                <input asp-for="Password" class="form-control fs-5 text-center">
+                <span asp-validation-for="Password" class="fs-6 text-danger-emphasis"></span>
+            </div>
+            <div class="mb-4">
+                <label asp-for="Confirm" class="form-label   fs-5 text-primary-emphasis"></label>
+                <input asp-for="Confirm" class="form-control fs-5">
+                <span asp-validation-for="Confirm" class="fs-6 text-center text-danger-emphasis"></span>
+            </div>
+            <button class="btn btn-primary w-25 float-end">Register</button>
+        </form>
+    </div>
+</div>

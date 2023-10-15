@@ -1,0 +1,39 @@
+@{
+    ViewData["Title"] = "New Wedding";
+    int? LoggedInId = Context.Session.GetInt32("UserId");
+}
+
+@model Wedding
+
+<div class="card shadow mt-5 mx-auto w-50 border-3 border-light-subtle">
+    <div class="card-header">
+        <h1 class="text-center text-warning-emphasis">Add a Wedding</h1>
+    </div>
+    <div class="card-body">
+        <form asp-action="CreateWedding" asp-controller="Wedding" method="post">
+            <input type="hidden" asp-for="UserId" value=@LoggedInId>
+            <div class="mb-3">
+                <label asp-for="WedderOne" class="form-label   fs-5 text-success-emphasis"></label>
+                <input asp-for="WedderOne" class="form-control fs-5 text-center">
+                <span asp-validation-for="WedderOne" class="fs-6 text-danger-emphasis"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="WedderTwo" class="form-label   fs-5 text-success-emphasis"></label>
+                <input asp-for="WedderTwo" class="form-control fs-5 text-center">
+                <span asp-validation-for="WedderTwo" class="fs-6 text-danger-emphasis"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Date" class="form-label   fs-5 text-success-emphasis"></label>
+                <input asp-for="Date" class="form-control fs-5 text-center">
+                <span asp-validation-for="Date" class="fs-6 text-center text-danger-emphasis"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Address" class="form-label   fs-5 text-success-emphasis"></label>
+                <input asp-for="Address" class="form-control fs-5 text-center">
+                <span asp-validation-for="Address" class="fs-6 text-danger-emphasis"></span>
+            </div>
+
+            <button class="btn btn-primary float-end">Create</button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,68 @@
+@{
+    ViewData["Title"] = "All Weddings";
+    int? UserId = Context.Session.GetInt32("UserId");
+}
+
+@model List<Wedding>
+
+
+
+<div class="card shadow mt-5 mx-auto w-75 border-3 border-light-subtle">
+    <div class="card-header">
+        <h1 class="text-center text-warning-emphasis">All Upcoming Weddings</h1>
+    </div>
+    <div class="card-body">
+        <table class="table table-hover">
+            
+            <thead>
+                <tr class="fs-5">
+                    <th scope="col" class="text-success-emphasis">Wedding of:</th>
+                    <th scope="col" class="text-success-emphasis">Date:</th>
+                    <th scope="col" class="text-success-emphasis text-center">Guest Count:</th>
+                    <th scope="col" class="text-success-emphasis text-center">Action:</th>
+                </tr>
+            </thead>
+
+            <tbody class="table-group-divider">
+                @foreach(Wedding w in Model)
+                {
+                    bool rsvpd = w.RSVPs.Any(r => r.UserId == UserId);
+                    <tr>
+                        <td class="align-middle fs-5">
+                            <a asp-action="ViewWedding" asp-route-id="@w.WeddingId" asp-controller="Wedding" class="text-decoration-none">
+                                @w.WedderOne & @w.WedderTwo
+                            </a>
+                        </td>
+                        <td class="align-middle fs-5">
+                            @w.Date.ToString("MMM d yyyy")
+                        </td>
+                        <td class="align-middle fs-5 text-center">
+                            @w.RSVPs.Count
+                        </td>
+                        <td class="align-middle fs-5 text-center">
+                            @if (w.UserId == UserId)
+                            {
+                                <form asp-action="DeleteWedding" asp-route-id="@w.WeddingId" asp-controller="Wedding" method="post">
+                                    <button class="btn btn-danger w-75">Delete</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <form asp-action="ToggleRSVP" asp-route-id="@w.WeddingId" asp-controller="Wedding" method="post">
+                                    @if (rsvpd)
+                                    {
+                                        <button class="btn btn-warning w-75">Un-RSVP</button>
+                                    }
+                                    else
+                                    {
+                                        <button class="btn btn-primary w-75">RSVP</button>
+                                    }
+                                </form>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

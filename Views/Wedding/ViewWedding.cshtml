@@ -1,0 +1,28 @@
+@{
+    ViewData["Title"] = "View Wedding";
+    int? LoggedInId = Context.Session.GetInt32("UserId");
+}
+
+@model Wedding
+
+<div class="card shadow mt-5 mx-auto w-50 border-3 border-light-subtle">
+    <div class="card-header">
+        <h1 class="text-center text-warning-emphasis">@Model.WedderOne & @Model.WedderTwo's Wedding</h1>
+    </div>
+    <div class="card-body">
+        <h3 class="text-success-emphasis">Date: <span class="text-light">@Model.Date.ToString("MMM d yyyy")</span></h3>
+        <h3 class="text-success-emphasis">Location: <span class="text-light">@Model.Address</span></h3>
+        <hr>
+        <h3 class="text-center text-success-emphasis">Guest List</h3>
+        <hr>
+
+        <ol class="list-group list-group-numbered">
+            @foreach(RSVP r in Model.RSVPs)
+            {
+                <li class="list-group-item fs-4 text-center text-success-emphasis">
+                    <span class="text-light">@r.User.FirstName @r.User.LastName</span>
+                </li>
+            }
+        </ol>
+    </div>
+</div>
